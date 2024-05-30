@@ -154,7 +154,7 @@ who is installed, and transform the resulting video into a GIF called `rec.gif`
 in the current working directory.
 
 All the available options are available using the `-h` or `--help` option and
-documented [on the top of this file](#rec.sh).
+documented [on the top of this file](#recsh).
 
 ---
 
