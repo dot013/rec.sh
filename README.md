@@ -6,7 +6,7 @@ to record GIFs of your screen.
 
 <details>
     <summary><small><i>Why?</i></small></summary>
-    <section aria-labelledby="why">
+    <section>
         <h2 id="why">Why?</h2>
         <p>
             I wanted to stop needing to type something like <code>wf-recorder -g $(slurp) ./temp.mp4</code>
@@ -21,7 +21,7 @@ to record GIFs of your screen.
             package future projects and tools that I make.
         </p>
     </section>
-    <section aria-labelledby="should-i-use-it">
+    <section>
         <h2 id="should-i-use-it">Should I use this?</h2>
         <p>
             Probably not. This is something that you can create yourself easily, and probably should,
@@ -32,7 +32,7 @@ to record GIFs of your screen.
             the dependencies are under the <a href="#dependencies">dependencies section</a>.
         </p>
     </section>
-    <section aria-labelledby="how-to-use">
+    <section>
         <h2 id="how-to-use">How to use</h2>
         <p>
             First, did you read <a href="#should-i-use-it">the "Should I use this?" section</a>?
