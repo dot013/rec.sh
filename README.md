@@ -106,7 +106,9 @@ to use it on NixOS **using flakes**:
 
 #### Installation methods
 
-##### Install as a NixOS module
+##### Install as a module
+
+###### NixOS
 ```nix
 # configuration.nix
 { inputs, ... }: {
@@ -118,7 +120,7 @@ to use it on NixOS **using flakes**:
 }
 ```
 
-##### Install as a Home Manager module
+###### Home Manager
 ```nix
 # home.nix
 { inputs, ... }: {
@@ -128,6 +130,16 @@ to use it on NixOS **using flakes**:
 
     programs.rec-sh.enable = true;
 }
+```
+
+###### Configuration
+
+```nix
+# configration.nix or home.nix
+programs.rec-sh.enable = true; # enables/installs the binary to your PATH
+
+# Path to the recorder binary, default to wf-recorder. Can be null to unset the RECSH_RECORDER variable.
+programs.rec-sh.recorder = "${pkgs.wf-recorder}/bin/wf-recorder"
 ```
 
 ##### Install as a package

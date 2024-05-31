@@ -8,11 +8,19 @@
     ,
     }:
     let
-      package = { pkgs, ... }:
+      package =
+        { pkgs
+        , recorder
+        , ...
+        }:
         pkgs.writeShellScriptBin "rec-sh" ''
           function slurp() { ${pkgs.slurp}/bin/slurp "$@"; }
           function ffmpeg() { ${pkgs.ffmpeg}/bin/ffmpeg "$@"; }
-          function wf-recorder() { ${pkgs.wf-recorder}/bin/wf-recorder "$@"; }
+          ${
+            if (builtins.isNull recorder)
+            then ""
+            else "RECSH_RECORDER=${recorder}"
+          }
 
           ${builtins.readFile ./rec.sh}
         '';
@@ -36,9 +44,13 @@
           options.programs.rec-sh = options { inherit config lib pkgs; };
           config = with lib;
             mkIf cfg.enable {
-              home.packages = [
-                self.packages.${pkgs.system}.rec-sh
-              ];
+              home.packages =
+                let
+                  recorder = cfg.recorder;
+                in
+                [
+                  (package { inherit pkgs recorder; })
+                ];
             };
         };
 
@@ -55,9 +67,13 @@
           options.programs.rec-sh = options { inherit config lib pkgs; };
           config = with lib;
             mkIf cfg.enable {
-              environment.systemPackages = [
-                self.packages.${pkgs.system}.rec-sh
-              ];
+              environment.systemPackages =
+                let
+                  recorder = cfg.recorder;
+                in
+                [
+                  (package { inherit pkgs recorder; })
+                ];
             };
         };
 
@@ -70,6 +86,10 @@
           with lib;
           with lib.types; {
             enable = mkEnableOption "";
+            recorder = mkOption {
+              type = nullOr str;
+              default = "${pkgs.wf-recorder}/bin/wf-recorder";
+            };
           };
 
       systems = [
@@ -80,17 +100,25 @@
     {
       packages =
         forAllSystems
-          (system: pkgs: {
-            rec-sh = package { inherit pkgs; };
-            default = self.packages.${system}.rec-sh;
-          });
+          (system: pkgs:
+            let
+              recorder = null;
+            in
+            {
+              rec-sh = package { inherit pkgs recorder; };
+              default = self.packages.${system}.rec-sh;
+            });
 
       legacyPackages =
         forAllSystems
-          (system: pkgs: {
-            rec-sh = package { inherit pkgs; };
-            default = self.legacyPackages.${system}.rec-sh;
-          });
+          (system: pkgs:
+            let
+              recorder = null;
+            in
+            {
+              rec-sh = package { inherit pkgs recorder; };
+              default = self.legacyPackages.${system}.rec-sh;
+            });
 
       nixosModules = {
         rec-sh = nixosModule;
