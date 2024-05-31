@@ -30,6 +30,10 @@ TEMP_FILE="/tmp/rec-sh-temp.mp4"
 
 VERBOSE=false
 
+if [ "$RECSH_RECORDER" ]; then
+	current_recsh_value="Current value: $RECSH_RECORDER"
+fi
+
 while [[ $# -gt 0 ]]; do
 	case "$1" in
 		-h|--help)
@@ -43,7 +47,7 @@ while [[ $# -gt 0 ]]; do
 			echo -e "Options:"
 			echo -e ""
 			echo -e "  ${COLOR_CYAN}-r${COLOR_NC}|${COLOR_CYAN}--region${COLOR_NC} [REGION] [REGION]"
-			echo -e "  Area that will be passed to ${COLOR_CYAN}$RECSH_RECORDER -r [REGION] [REGION]${COLOR_NC}, if none is passed, the script"
+			echo -e "  Area that will be passed to ${COLOR_CYAN}$(basename "$RECSH_RECORDER") -r [REGION] [REGION]${COLOR_NC}, if none is passed, the script"
 			echo -e "  will try to use ${COLOR_CYAN}slurp${COLOR_NC} if it is installed."
 			echo -e ""
 			echo -e "  ${COLOR_CYAN}-c${COLOR_NC}|${COLOR_CYAN}--compress${COLOR_NC} <true|false|1|0> DEFAULT=true"
@@ -57,6 +61,12 @@ while [[ $# -gt 0 ]]; do
 			echo -e ""
 			echo -e "  ${COLOR_CYAN}-h${COLOR_NC}|${COLOR_CYAN}--help${COLOR_NC}"
 			echo -e "  Show this help screen."
+			echo -e ""
+			echo -e "Config:"
+			echo -e ""
+			echo -e "  ${COLOR_CYAN}RECSH_RECORDER${COLOR_NC}=<path to recorder binary>"
+			echo -e "  Command/path to binary of the recorder to be used instead of ${COLOR_CYAN}wf-recorder${COLOR_NC} or ${COLOR_CYAN}wl-screenrec${COLOR_NC}"
+			echo -e "  in your PATH. $current_recsh_value"
 			echo -e ""
 			echo -e '2024 (c) Gustavo "Guz" L. de Mello <contact.guz013@gmail.com>'
 			echo -e 'Licensed under WTFPL license. PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.'
