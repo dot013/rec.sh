@@ -149,6 +149,9 @@ programs.rec-sh.recorder = "${pkgs.wf-recorder}/bin/wf-recorder"
     environment.systemPackages = [
         inputs.rec-sh.packages.${pkgs.system}.rec-sh
         # or inputs.rec-sh.legacyPackages.${pkgs.system}.rec-sh
+
+        # remember to install pkgs.wf-recorder, pkgs.wl-screenrec or set
+        # the RECSH_RECORDER variable manually.
     ];
 }
 ```
@@ -159,6 +162,9 @@ programs.rec-sh.recorder = "${pkgs.wf-recorder}/bin/wf-recorder"
     home.packages = [
         inputs.rec-sh.packages.${pkgs.system}.rec-sh
         # or inputs.rec-sh.legacyPackages.${pkgs.system}.rec-sh
+
+        # remember to install pkgs.wf-recorder, pkgs.wl-screenrec or set
+        # the RECSH_RECORDER variable manually.
     ];
 }
 ```
