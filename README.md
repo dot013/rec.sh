@@ -30,6 +30,14 @@ Options:
   -h|--help
   Show this help screen.
 
+Configs:
+
+  RECSH_RECORDER=<path to recorder binary>
+  Command/path to binary of the recorder to be used instead of wf-recorder or wl-screenrec
+  in your PATH.
+
+2024 (c) Gustavo "Guz" L. de Mello <contact.guz013@gmail.com>
+Licensed under WTFPL license. PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.
 ```
 
 ---
